@@ -1,0 +1,254 @@
+\documentclass[11pt]{article}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{mathtools}
+\usepackage[style=numeric,sorting=none]{biblatex}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[margin=1.5in,footskip=0.25in]{geometry}
+\usepackage{amsfonts}
+\usepackage{csquotes}
+\usepackage{filecontents}
+\usepackage{hyperref}
+\usepackage{varwidth}
+\usepackage{amsmath, amsthm}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{exmp}[thm]{Example} 
+\addbibresource{ref.bib}
+\begin{document}
+
+% -------------------------------box---------------------------------------
+\begin{center}
+\fbox{\begin{varwidth}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
+\makebox[2in][l]{\footnotesize Queens College: Fall 2020}\footnotesize CS220: Discrete Structures\\
+\makebox[3.5in]{\large \textbf{Ch.3: 3.1 and 3.3}}\\
+\makebox[2in][l]{\footnotesize Lecturer: Paul Cesaretti}\footnotesize Scribes: Orzeeta Kamal, Amalia Torres\\
+\makebox[2.5in][l]{}JP Quintero, Ahmed Fathalla\\
+\makebox[2.5in][l]{}Suyogya Rayamajhi
+\end{varwidth}}
+\end{center}
+% -------------------------------box---------------------------------------
+
+
+% -------------------------------ORZEETA---------------------------------------
+\begin{center}
+\large{Chapter 3}\\
+\huge{\bfseries Algorithms}
+\end{center}
+
+	
+
+This chapter discusses how different algorithms can be used to solve a wide variety of problems, what time-complexity these algorithms have, and learn some properties and proofs.
+
+
+\begin{defn}
+An algorithm is a finite sequence of precise instructions for performing a computation or solving a problem.
+\cite{rosen:1}
+
+\end{defn}
+In other words, an algorithm is a step-by-step procedure to solve a given problem. The word ‘finite’ means that the algorithm should reach to an endpoint and it can not run forever.\\
+
+\setlength{\parindent}{0pt}\textbf{Historical Context}\\
+Algorithms have a long history which can be traced back to the 9th century.  A Persian scientist, astronomer and mathematician named Al-Khowarizmi, known as ‘The Father of Algebra’ wrote a book on Hindu numerals which is the basis of modern decimal notations \cite{Schönhart:2}. The word algorithm evolved from algorism in the eighteenth century.The term ‘Algorism’ was used for the rules for performing arithmetic using decimal notation \cite{rosen:1}. With the growing interest in computing machines, the concept of an algorithm was given a more general meaning, to include all definite procedures for solving problems.\\
+
+\textbf{Problems that are solved by algorithm are:}\\
+[1mm]
+	$\bullet$ Find/search for a maximum value in a list\\
+	$\bullet$ Traveling Salesman Problem\\
+	$\bullet$ Stable Marriage
+
+\bigbreak
+\textbf{7 Properties of Algorithm \cite{rosen:1}}\\
+[1.5mm]
+There are several properties that algorithms generally share. They are useful to keep in mind when algorithms are described.\\
+
+$1)$\textbf{Input}  An algorithm must have input values from a specified set.\\
+	[1mm]
+$2)$\textbf{Output}  From each set of input values an algorithm 		produces output values from a specified set. The output values are the 		solution to the problem.\\
+	[1mm]
+$3)$\textbf{Definiteness}  All steps of the algorithm must be precisely defined.\\
+	[1mm]
+$4)$\textbf{Finiteness}  For any input, the algorithm must terminate after a finite number of steps.\\
+	[1mm]
+$5)$\textbf{Correctness}  An algorithm should produce the correct output values for each set of input values.\\
+	[1mm]
+$6)$\textbf{Effectiveness}  It must be possible to perform each step of the algorithm and correctly and in a finite amount of time.\\
+	[1mm]
+$7)$\textbf{Generality}  The procedure should be applicable for all problems of the desired form, not just for a particular set of input values.\\
+
+
+
+
+
+	
+% \end{titlepage}
+
+% ------------------------------AMALIA TORRES------------------------------
+
+
+
+
+\section*{1. Linear Search}
+Linear search is a searching technique used to find an element in a list. In linear search, the target item is checked against all the elements in a list.
+
+Given that $x\in $ $\mathbb{Z}$ and $\{a_1,\ldots,a_n \}=A$, the linear search algorithm begins by comparing $x$ and $a_1$. If $x = a_1$, the solution is 1, the location of $a_1$. If $x\neq a_1$, x is compared with $a_2$. If $x = a_2$, the solution is 2. If $x\neq a_2$, this process is sequentially continued with all the elements in the list. If the entire list has been searched without locating $x$, the solution is 0 \cite{rosen:1}. 
+\bigbreak
+\begin{algorithm}[H] 
+\SetAlgoLined
+\textbf{procedure} \textit{linear search }(\textit{x}: integer, $\{a_1,a_2,\ldots,a_n \}$ : distinct integers)\\
+$i := 1$ \\
+\textbf{while} ($i \le n$ and $x\neq a_1$)\\
+\setlength{\parindent}{15pt}$i := i+1$ \\
+\setlength{\parindent}{0pt}\textbf{if} $i \le n$ \textbf{then} $location = i$\\
+\textbf{else} $location:=1$\\
+\textbf{return} $location \{ location $ is the subscript of the term that equals $x$, or is 0 if $x$ is not found\}\\
+\caption{Linear Search Algorithm \cite{rosen:1}}
+\end{algorithm}
+\begin{thm}
+Linear search takes O(n) time where n is the number of input elements to the algorithm
+\end{thm}
+Linear search has linear-time complexity. The time it takes for the algorithm to run is proportional to the number of elements in the list. While using linear search, the best case scenario would be $O(1)$ where the first query is the answer.  The worst case scenario would be $O(m)$ where the element is not in the list.
+\subsection*{Efficiency of an Algorithm } 
+We say that an algorithm is efficient if $\exists$ a polynomial $p(x)$ such that $\forall$ input of size $n$, the running time of A will take at most $|p(x)|$ steps.
+ \setlength{\parindent}{0pt}\bigbreak
+Polynomial run-time is used as a measure of efficiency. 
+
+\begin{defn}
+A polynomial of degree n is a function $f:\mathbb{R} \Rightarrow \mathbb{R}$ of the following for m:
+$$a_nx^n+a_{n-1}x_{n-1}+ \ldots +a_2x^2+a_1x+a$$
+Where coefficients $a_i\in \mathbb{R}$ such that $a_n \neq 0$
+\end{defn}
+\subsection*{}
+
+
+% ----------------------------------JP----------------------------------
+
+\section*{2. Binary Search}
+\begin{defn}Binary search is an optimal searching technique that identifies the ordinal, or index, position of a desired element in a presorted list, \textit{A}.\end{defn} 
+
+According to Rosen \cite{rosen:1}, the list, \textit{A}, is continually split into smaller sublists, either of the same size or one less than the other, after comparing the targeted item against its middle element. These sublists are further decomposed until it reaches a size of 1. \par Each iteration undergoes the following two comparisons: (1) if \textit{i} $<$ \textit{j}, which verifies that the sublist's size is greater than 1, where \textit{i} is the index of a sublist's lower boundary and \textit{j} is its upper boundary, and (2) if the desired element is greater than a sublist's middle element, \textit{A\textsubscript{m}}, where \textit{m} = $\displaystyle\floor*{(i+j)/2}$ is the middle element's index. Lastly, once the sublist has degraded to 1 element, two final comparisons consists of the following criteria: (1) if \textit{i} $<$ \textit{j}, which serves as the loop's terminating condition, and (2) if the targeted item exists in the list then its index is retrieved otherwise 0 is returned indicating false assuming $\textit{A}$ is a non zero-based list.
+\bigbreak
+\begin{algorithm}[H]
+\SetAlgoLined
+ \textbf{procedure} \textit{binary search}(\textit{x}: integer, \textit{A}[]: sorted array of increasing integers)\;
+ \textit{i} = 1 \{\textit{i} is left endpoint of search interval\}\;
+ \textit{j} = \textit{n} \{\textit{j} is right endpoint of search interval\}\;
+ \textbf{while} {\textit{i} $<$ \textit{j}}\;
+ \setlength{\parindent}{15pt}\textit{m} = $\displaystyle\floor*{(i+j)/2}$\;
+ \textbf{if} \textit{x} $>$ \textit{A\textsubscript{m}} \textbf{then} \textit{i} = \textit{m} + 1\;
+ \textbf{else} \textit{j} = \textit{m}\;
+ \setlength{\parindent}{0pt}\textbf{if} \textit{x} $=$ \textit{A\textsubscript{i}} \textbf{then} \textit{location} = \textit{i}\;
+ \textbf{else} \textit{location} = 0\;
+ \textbf{return} \textit{location} \{\textit{location} is the subscript \textit{i} of the term \textit{A\textsubscript{i}} equal to \textit{x}, or 0 if \textit{x} is not found\}
+ \caption{Binary Search Algorithm \cite{rosen:1}}
+\end{algorithm}
+\begin{thm}
+Binary search takes O(log n) time where n is the number of input elements to the algorithm
+\end{thm}
+\subsection*{Approximating number of iterations}
+\begin{center}
+\normalsize
+\begin{tabular}{ p{5cm}p{5cm}  }
+\hline
+Count of iterations & Approximation of \textit{n}=$|$\textit{A}$|$\\
+\hline
+0 & $ \frac{\textit{n}}{2\textit{\textsuperscript{0}}} $ $=$ \textit{n}\\
+1 & $ \frac{\textit{n}}{2\textit{\textsuperscript{1}}} $ $=$ $ \frac{\textit{n}}{2}$ \\
+2 & $ \frac{\textit{n}}{2\textit{\textsuperscript{2}}} $ $=$ $ \frac{\textit{n}}{4}$ \\
+3 & $ \frac{\textit{n}}{2\textit{\textsuperscript{3}}} $ $=$ $ \frac{\textit{n}}{8}$ \\
+... \\
+i & $ \frac{\textit{n}}{2\textit{\textsuperscript{i}}} $ \\
+\hline
+\end{tabular}
+\end{center}
+
+\setlength{\parindent}{0pt}\textbf{\textit{Question}}: Given a list of size \textit{n}=$|$\textit{A}$|$, how many iterations will we do?\\
+\textbf{\textit{Answer}}: As many as it takes to get to a list of size 1\\\\
+\textit{Given}: \textit{n} = $|$\textit{A}$|$ and 2\textit{\textsuperscript{i}} is the number of comparisons per iteration, \textit{i}.\\
+\begin{equation}1 = \frac{\textit{n}}{2\textit{\textsuperscript{i}}} \end{equation}
+\begin{equation}2\textit{\textsuperscript{i}} = n\end{equation}
+\begin{equation}\log_2 2\textit{\textsuperscript{i}} = \log_2 n\end{equation}
+\begin{equation}\textit{i} = \log_2 n\end{equation}
+\textit{Conclusion}: \textit{i} $=$ count of iterations in binary search $\equiv$ runtime of O(log \textit{n})
+\subsection*{Approximating number of comparisons}
+The formula for determining the number of comparison is dependent on whether the size of the list, \textit{n} = $|$\textit{A}$|$, is divisible by 2. If not, then according to Rosen \cite{rosen:1}, the list will be factored into a larger list where 2\textit{\textsuperscript{k}} $<$ \textit{n} $<$ 2\textit{\textsuperscript{k+1}}.\\
+
+\setlength{\parindent}{0pt}\textbf{\textit{n} $|$ 2\textit{\textsuperscript{k}}}\\
+2\textit{k} + 2 = 2log \textit{n} + 2 where \textit{n} = 2\textit{\textsuperscript{k}} and \textit{k} = log \textit{n}\\
+
+\textbf{\textit{n} $\not|$ 2\textit{\textsuperscript{k}}}\\
+2\textit{k} + 2 = 2$\ceil*{\textnormal{log \textit{n}}}$ + 2 where \textit{n} = 2\textit{\textsuperscript{k}} and \textit{k} = $\ceil*{\textnormal{log \textit{n}}}$\\\\
+2$\ceil*{\textnormal{log \textit{n}}}$ + 2 $\approx$ 2log \textit{n} + O(1) $\in$ O(log \textit{n})
+
+
+
+% ------------------------------------ahmed------------------------------------
+\section*{4.Tractable vs Intractable problems }
+Problems in Polynomial Time (P) are called \textbf{tractable} and problems in Non-deterministic Polynomial (NP) are called \textbf{intractable} \cite{rosen:1}.
+Tractable problems such as searching or sorting involve a particular algorithm that is used to solve the problem in a short time,as long as the input isn't too large , with a polynomial worse-case complexity. It expects the input not to be too large
+.However, If the degree of Big-O or the coefficients are too
+large , then the algorithm might take a longer time to be solved.
+Conversely , intractable problems , which are more complex , usually take longer times to be solved even with small inputs due to the lack of an efficient algorithm. 
+For example , the traveling salesman problem asks you to determine the shortest route a salesperson 
+can take in order to visit a number of cities once and return to the starting point in the shortest distance possible .
+To solve that problem , we don't know of an algorithm that is more efficient than an exponential time complexity or $O(2^n)$.
+\bigbreak
+\includegraphics[]{figure 1}
+
+\bigbreak
+In some cases ,there exists intractable problems that are \textbf{unsolvable}  which don't have an algorithm to be solved with. 
+
+\section*{Computational model}
+
+\begin{defn} \textbf{Computational model} is a mathematical model used to instruct computers on study and simulate complex systems to perform 
+particular tasks.\cite{nibib:3} \newline
+Types of computational models : \newline
+1. Turing machine  \newline
+2. Circuit \newline
+3. RAM model\end{defn}
+
+\begin{defn} \textbf{Turing machine} is  a machine that has enough memory to recognize many languages due to it's reading and writing capabilities,which allows it to move back and forth along the tape. Due to it's intricacy, it's able to carry out many computations as opposed to Finite-state automata.\end{defn}
+
+\includegraphics[]{figure 2}
+
+\begin{defn} \textbf{Random Access Machine} is a model that calculates a run time of an algorithm by performing a single step at a time. It starts by counting the number of steps and then converting that number into time in seconds.  \cite{Skiena:4} \newline
+Types of operations :\newline
+1. Arithmetic  \newline
+2. Boolean \newline
+3. Access a unit of memory \newline
+4. Comparisons
+\end{defn}
+
+% -----------------------------------suyogya----------------------------------
+
+
+\section*{5. Uncomputable Problems}
+Problems for which we know through a proof that there exists no such algorithm that solves the it and either give a wrong answer or run forever without giving any answers are uncomputable problems.
+\section*{The Halting Problem}
+\par The Halting Problem is a decision problem in Computability Theory. It asks, given a computer program and an input, will the program terminate or will it run forever?
+
+\section*{Proof by contradiction}
+\SetAlgoLined
+ \textbf{Definition:} \par Assume that there is program \emph{H} that when given program \emph{P} and Input \emph{I} determines whether \emph{P} halts or loops forever on input \emph{I}. 
+ \par We know that the program \emph{P} either halts on input \emph{I} or loops forever. The input and programs are equivalent by the right encoding.
+ So, the two possible outcomes for the program H are:
+ \par a. Program \emph{P} halts when given itself as Input
+ OR
+ \par b. Program \emph{H} loops forever
+ \newline
+ \newline
+ \textbf{Proof: \cite{Husfeldt:5}}
+ \par Suppose there exists a Turing machine \emph{A} that decides \emph{H}. Now Consider a Turing Machine \emph{B} defined as follows: it takes an input (p), runs \emph{A} on input \textbf{(p,p)} and halts if and only if \emph{A} rejects. This means, \emph{B} takes a program \emph{p}, runs the supposed Turing machine that decides the halting problem on the input "program \emph{p}, input \textbf{(p)}"; based on the outcome, if it says "yes, \emph{p} on input \textbf{(p)} halts", then it loops forever, otherwise if it says "no, \emph{p} on input \textbf{(p)} doesn't halt", then it terminates. Note that \textbf{(p)} is the encoding of a program \emph{p} into a suitable input (bit-string or natural number), and hence can be accepted as input by another program.
+ Consider what happens when \emph{B} receives \textbf{(B)} as input. It runs A on the input \textbf{(B,(B))}. We now have two cases:
+ \par 1. \textbf{A accepts}. This means B on input \textbf{(B)} halts. But by definition of \emph{B}, if \emph{A} accepts we will enter an infinite loop, and so \emph{B} on input (B) doesn't halt after all.
+ \par 2. \textbf{A rejects}. This means B on input \textbf{(B)} doesn't halt. But by definition of \emph{B}, if \emph{A} rejects we will terminate, and so \emph{B} on input \textbf{(B)} halts after all.
+ \newline
+ \newline
+ \textbf{Conclusion:}\par In both cases, we derive a contradiction. This contradiction happens because we assumed the existence of \emph{A}; its existence allows us to create \emph{B} that behaves incorrectly. Thus \emph{A} cannot exist, and so no Turing machine can decide \emph{H}.
+\pagebreak
+\printbibliography
+\end{document}
